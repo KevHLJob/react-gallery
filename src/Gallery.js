@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import './gallery.css';
+import CloseIcon from '@material-ui/icons/Close';
+
+import Img1 from './img/img1.jpg';
+import Img2 from './img/img2.jpg';
+import Img3 from './img/img3.jpg';
+import Img4 from './img/img4.jpg';
+import Img5 from './img/img5.png';
+import Img6 from './img/img6.jpg';
+
+const Gallery = () =>{
+
+    let imag=[
+        {
+            id:1,
+            imgSrc:Img1,
+
+        },
+        {
+            id:2,
+            imgSrc:Img2,
+
+        },
+        {
+            id:3,
+            imgSrc:Img3,
+
+        },
+        {
+            id:4,
+            imgSrc:Img4,
+
+        },
+        {
+            id:5,
+            imgSrc:Img5,
+
+        },
+        {
+            id:6,
+            imgSrc:Img6,
+
+        }
+    ]
+
+
+    const [model, setModel] = useState(false);
+    const [tempimgSrc, setTempimgSrc] = useState('');
+    const getImg = (imgSrc)=>{
+        setTempimgSrc(imgSrc);
+        setModel(true);
+    }
+
+return(
+    <>
+            {/*La imagen temporal sera mostrada en este div */}
+    <div className={model? "model open": "model"}>
+        <img src={tempimgSrc}  />
+        <CloseIcon onClick={() => setModel(false)} />
+    </div>
+    
+    <div className='gallery'>
+        {/* Mapeo de arreglo para insertar las imagenes */}
+        {imag.map((item, index)=> {
+            return(
+                <div className='pics' key={index} onClick={()=> getImg(item.imgSrc)}>
+                    <img src={item.imgSrc} style={{width: '100%'}} />
+                </div>
+            )
+        })}
+    </div>
+    
+    </>
+
+
+    )
+
+}
+
+export default Gallery;
